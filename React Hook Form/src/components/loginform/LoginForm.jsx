@@ -1,43 +1,15 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import Input from "./Input";
+
 const LoginForm = () => {
-  // const [fullName, setFullName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [qualification, setQualification] = useState("");
-  // const [designation, setDesignation] = useState("");
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    qualification: "",
-    designation: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // const onNameChangeHandler = (e) => {
-  //   setFullName(e.target.value);
-  // };
-  // const onEmailChangeHandler = (e) => {
-  //   setEmail(e.target.value);
-  // };
-  // const onQualificationChangeHandler = (e) => {
-  //   setQualification(e.target.value);
-  // };
-  // const onDesignationChangeHandler = (e) => {
-  //   setDesignation(e.target.value);
-  // };
-  const onChangeHandler = (e) => {
-    formData.fullName = e.target.value;
-    formData.email = e.target.value;
-    formData.qualification = e.target.value;
-    formData.designation = e.target.value;
-  };
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-
-    setFormData(data => );
-  };
-
-  console.log(formData);
+  const onSubmitHandler = (data) => console.log(data);
 
   return (
     <div className="w-screen h-screen flex items-center justify-center flex-col">
@@ -47,35 +19,32 @@ const LoginForm = () => {
         </h4>
         <form
           className="flex flex-col gap-4 w-full p-2"
-          onSubmit={onSubmitHandler}
+          onSubmit={handleSubmit(onSubmitHandler)}
         >
           <input
             type="text"
+            defaultValue="Ajit Sharma"
+            {...register("fullName", { required: true })}
             placeholder="Enter your full name"
             className="p-2 text-lg text-neutral-900 bg-gray-100"
-            value={formData.fullName}
-            onChange={onChangeHandler}
           />
           <input
             type="email"
+            {...register("email", { required: true })}
             placeholder="Enter your email id"
             className="p-2 text-lg text-neutral-900 bg-gray-100"
-            value={formData.email}
-            onChange={onChangeHandler}
           />
           <input
             type="text"
+            {...register("qualification", { required: true })}
             placeholder="Qualifiation"
             className="p-2 text-lg text-neutral-900 bg-gray-100"
-            value={formData.qualification}
-            onChange={onChangeHandler}
           />
           <input
             type="text"
+            {...register("designation", { required: true })}
             placeholder="Current Designation"
             className="p-2 text-lg text-neutral-900 bg-gray-100"
-            value={formData.designation}
-            onChange={onChangeHandler}
           />
 
           <button
